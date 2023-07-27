@@ -2,6 +2,8 @@
 
 #include <LiquidCrystal.h>
 
+// if the GND connection is removed then background color is also removed
+
 // initialize the library by associating any needed LCD interface pin
 // with the arduino pin number it is connected to
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
