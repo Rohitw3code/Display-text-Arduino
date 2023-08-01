@@ -25,7 +25,9 @@ while True:
             text = r.recognize_google(audio)
             text = text.lower()
             print("You said "+text+"\n")
-            msg(text)
+            if len(text)>16:
+                msg(text[:16])
+                msg(text[16:])
             
         
             

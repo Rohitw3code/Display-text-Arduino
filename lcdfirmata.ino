@@ -2,6 +2,7 @@
 #include <Firmata.h>
 
 LiquidCrystal lcd(2,3,4,5,6,7);
+
 int lastLine = 1;
 
 void stringDataCallback(char *stringData){
