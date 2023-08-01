@@ -1,5 +1,5 @@
 import speech_recognition as sr
-from pyfirmata import Arduino
+from pyfirmata import Arduino, util, STRING_DATA
 import serial
 
 port = "COM8"
@@ -8,12 +8,11 @@ board = Arduino(port)
 # ser = serial.Serial(port, 115200, timeout=0)
 r = sr.Recognizer()
 
+# board.send_sysex( STRING_DATA, util.str_to_two_byte_iter('Hello!') )
 
-def highPin(pin):
-    board.digital[pin].write(1)
-
-def lowPin(pin):
-    board.digital[pin].write(0)
+def msg( text ):
+    if text:
+        board.send_sysex( STRING_DATA, util.str_to_two_byte_iter( text ) )
 
 
 while True:
@@ -26,23 +25,7 @@ while True:
             text = r.recognize_google(audio)
             text = text.lower()
             print("You said "+text+"\n")
-            # ser.write(str.encode(text))
-            if "red" in text:
-                highPin(9)
-                lowPin(7)
-                lowPin(3)
-            elif "green" in text:
-                highPin(3)
-                lowPin(9)
-                lowPin(7)
-            elif "blue" in text:
-                highPin(7)
-                lowPin(9)
-                lowPin(3)
-            else:
-                lowPin(9)
-                lowPin(7)
-                lowPin(3)
+            msg(text)
             
         
             
